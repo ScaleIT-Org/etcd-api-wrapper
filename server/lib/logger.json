@@ -1,0 +1,24 @@
+{
+    "locale": "de-DE",
+    "filename": true,
+    "levels": {
+        "error": 0,
+        "warn": 1,
+        "info": 2,
+        "verbose": 3,
+        "debug": 4,
+        "silly": 5
+    },
+    "logger": {
+        "console": {
+            "active": true,
+            "level": "silly",
+            "colorize": true
+        },
+        "file": {
+            "active": true,
+            "filename": "server-log.log",
+            "level": "warn"
+        }
+    }
+}

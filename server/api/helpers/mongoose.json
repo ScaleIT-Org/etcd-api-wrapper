@@ -1,0 +1,5 @@
+{
+    "yml2js": true,
+    "schemaPath": "/api/schemas",
+    "discriminatorKey": "kind"
+}

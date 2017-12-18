@@ -1,0 +1,20 @@
+swagger: "2.0"
+info:
+  version: "0.9.1"
+  title: ScaleIT App Registry MongoDB
+host: localhost:10010
+basePath: /
+# 
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /v1/apps:
+    $ref: 'api/paths/apps.yaml'
+  /v1/apps/{id}:
+    $ref: 'api/paths/app.yaml'
+  /swagger:
+    x-swagger-pipe: swagger_raw

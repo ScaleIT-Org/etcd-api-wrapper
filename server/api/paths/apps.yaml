@@ -1,0 +1,33 @@
+x-swagger-router-controller: apps
+get:
+  description: Returns 'Apps' to the caller
+  operationId: getApps
+  parameters:
+    - $ref: '../swagger/parameters.yaml#/parameters/language'
+    - $ref: '../swagger/parameters.yaml#/parameters/offset'
+    - $ref: '../swagger/parameters.yaml#/parameters/limit'
+    - name: kind
+      in: query
+      description: the kind of apps that should be returned
+      required: false
+      type: string
+  responses:
+    "200":
+      description: Success
+      schema:
+        type: object
+        properties:
+          offset:
+            type: number
+          limit:
+            type: number
+          total:
+            type: number
+          apps:
+            type: array
+            items:
+              $ref: "../schemas/App.yaml"
+    default:
+      description: Error
+      schema:
+        $ref: "../definitions/Error.yaml"

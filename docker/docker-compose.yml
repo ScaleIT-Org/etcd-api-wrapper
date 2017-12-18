@@ -1,0 +1,14 @@
+version: '3.1'
+services:
+
+  app-registry-mongodb:
+    image: ${REGISTRY_ADDRESS}/app-registry-mongodb:v1.0.0
+    build:
+      context: ./../
+      dockerfile: ./docker/DomainSoftware/app-registry-mongodb/Dockerfile
+
+  app-registration-mongodb:
+      image: ${REGISTRY_ADDRESS}/app-registration-mongodb:v1.0.0
+      build:
+        context: ./../
+        dockerfile: ./docker/DomainSoftware/app-registration-mongodb/Dockerfile

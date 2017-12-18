@@ -1,0 +1,63 @@
+x-swagger-router-controller: apps
+get:
+  description: Get an app
+  operationId: getApp
+  parameters:
+    - $ref: '../swagger/parameters.yaml#/parameters/id'
+  responses:
+    "200":
+      description: Success
+      schema:
+        $ref: "../schemas/App.yaml"
+    default:
+      description: Error
+      schema:
+        $ref: "../definitions/Error.yaml"
+post:
+  description: Create an app
+  operationId: createApp
+  parameters:
+    - $ref: '../swagger/parameters.yaml#/parameters/id'
+    - name: app
+      description: App
+      schema:
+        $ref: "../schemas/App.yaml"
+      in: body
+      required: true
+  responses:
+    "200":
+      description: Success
+      schema:
+        $ref: "../schemas/App.yaml"
+    default:
+      description: Error
+      schema:
+        $ref: "../definitions/Error.yaml"
+put:
+  description: Update an app
+  operationId: updateApp
+  parameters:
+    - $ref: '../swagger/parameters.yaml#/parameters/id'
+  responses:
+    "200":
+      description: Success
+      schema:
+        $ref: "../schemas/App.yaml"
+    default:
+      description: Error
+      schema:
+        $ref: "../definitions/Error.yaml"
+delete:
+  description: Delete an app
+  operationId: deleteApp
+  parameters:
+    - $ref: '../swagger/parameters.yaml#/parameters/id'
+  responses:
+    "200":
+      description: Success
+      schema:
+        $ref: "../schemas/App.yaml"
+    default:
+      description: Error
+      schema:
+        $ref: "../definitions/Error.yaml"

@@ -1,0 +1,5 @@
+name: Dummy ERP-Proxy
+description: |
+  ERP-Proxy wich returns dummy data
+version: 1.0
+category: ERP

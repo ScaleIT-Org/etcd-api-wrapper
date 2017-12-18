@@ -1,0 +1,52 @@
+type: object
+required:
+  - id
+  - url
+  - category
+  - appType
+  - lifecycleStatus
+mongoose:options:
+  timestamps: true
+properties:
+  id:
+    type: string
+    mongoose:unique: true
+  url:
+    type: string
+  description:
+    type: string
+  icon:
+    type: string
+    format: hostname
+  category:
+    type: string
+    enum:
+      - productivity
+      - utilities
+      - tools
+      - development
+      - connectivity
+  appType:
+    type: string
+    enum:
+      - erp
+      - photo
+      - domainApp
+      - platformEssential
+      - businessEssential
+  lifecycleStatus:
+    type: string
+    enum:
+      - online
+      - offline
+      - upgrading
+      - disabled
+      - installing
+      - error
+      - blocking
+  visibleForRole:
+    type: array
+    mongoose:ref: Role
+    items:
+      type: string
+      format: uri
