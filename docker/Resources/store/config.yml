@@ -1,5 +1,5 @@
-name: Dummy ERP-Proxy
+name: ScaleIT App-Registry (Yellow Pages)
 description: |
-  ERP-Proxy wich returns dummy data
+  ScaleIT App-Registry which stores data in MongoDB
 version: 1.0
-category: ERP
+category: Platform-Essential
