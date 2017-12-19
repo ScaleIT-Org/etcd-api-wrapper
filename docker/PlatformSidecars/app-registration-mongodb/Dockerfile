@@ -7,4 +7,7 @@ COPY docker/PlatformSidecars/app-registration-mongodb/sidecar.sh /usr/app-regist
 
 RUN chmod 777 sidecar.sh
 
+# Install prerequisites
+RUN apt-get update && apt-get install -y curl
+
 CMD ["./sidecar.sh"]
