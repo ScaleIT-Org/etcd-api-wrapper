@@ -1,0 +1,7 @@
+type: object
+required:
+  - health
+properties:
+  health:
+    type: string
+    example: true

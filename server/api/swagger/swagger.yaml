@@ -12,9 +12,11 @@ consumes:
 produces:
   - application/json
 paths:
-  /v1/apps:
+  /api/v1/health:
+    $ref: 'api/paths/health.yaml'
+  /api/v1/apps:
     $ref: 'api/paths/apps.yaml'
-  /v1/apps/{id}:
+  /api/v1/apps/{id}:
     $ref: 'api/paths/app.yaml'
   /swagger:
     x-swagger-pipe: swagger_raw
