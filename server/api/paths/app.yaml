@@ -13,31 +13,17 @@ get:
       description: Error
       schema:
         $ref: "../definitions/Error.yaml"
-post:
-  description: Create an app
-  operationId: createApp
-  parameters:
-    - $ref: '../swagger/parameters.yaml#/parameters/id'
-    - name: app
-      description: App
-      schema:
-        $ref: "../schemas/App.yaml"
-      in: body
-      required: true
-  responses:
-    "200":
-      description: Success
-      schema:
-        $ref: "../schemas/App.yaml"
-    default:
-      description: Error
-      schema:
-        $ref: "../definitions/Error.yaml"
 put:
   description: Update an app
   operationId: updateApp
   parameters:
     - $ref: '../swagger/parameters.yaml#/parameters/id'
+    - name: body
+      description: App
+      schema:
+        type: object
+      in: body
+      required: true
   responses:
     "200":
       description: Success

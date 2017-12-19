@@ -48,10 +48,15 @@ function getApp(req, res) {
           let responseCode = 200;
           try {
                let id = req.swagger.params.id.value;
-               result = await mongodb.getObjectById("App", req.body, req.query, id);
+               result = await mongodb.getObjectById("App", req.body, req.query, id, "id");
           } catch (error) {
-               responseCode = error.httpStatusCode ? error.httpStatusCode : 500;
-               result = error;
+               if (error.httpStatusCode) {
+                    result = error;
+                    responseCode = error.httpStatusCode;
+               } else {
+                    responseCode = 500;
+                    result.message = error.message;
+               }
           }
           res.status(responseCode).json(result);
      })();
@@ -62,11 +67,15 @@ function createApp(req, res) {
           let result = {};
           let responseCode = 200;
           try {
-               let id = req.swagger.params.id.value;
-               result = await mongodb.createObject("App", req.body, req.query, id);
+               result = await mongodb.createObject("App", req.body, req.query);
           } catch (error) {
-               responseCode = error.httpStatusCode ? error.httpStatusCode : 500;
-               result = error;
+               if (error.httpStatusCode) {
+                    result = error;
+                    responseCode = error.httpStatusCode;
+               } else {
+                    responseCode = 500;
+                    result.message = error.message;
+               }
           }
           res.status(responseCode).json(result);
      })();
@@ -78,10 +87,15 @@ function updateApp(req, res) {
           let responseCode = 200;
           try {
                let id = req.swagger.params.id.value;
-               result = await mongodb.updateObject("App", req.body, req.query, id);
+               result = await mongodb.updateObject("App", req.body, req.query, id, "id");
           } catch (error) {
-               responseCode = error.httpStatusCode ? error.httpStatusCode : 500;
-               result = error;
+               if (error.httpStatusCode) {
+                    result = error;
+                    responseCode = error.httpStatusCode;
+               } else {
+                    responseCode = 500;
+                    result.message = error.message;
+               }
           }
           res.status(responseCode).json(result);
      })();
@@ -93,10 +107,15 @@ function deleteApp(req, res) {
           let responseCode = 200;
           try {
                let id = req.swagger.params.id.value;
-               result = await mongodb.deleteObject("App", req.body, req.query, id);
+               result = await mongodb.deleteObject("App", req.body, req.query, id, "id");
           } catch (error) {
-               responseCode = error.httpStatusCode ? error.httpStatusCode : 500;
-               result = error;
+               if (error.httpStatusCode) {
+                    result = error;
+                    responseCode = error.httpStatusCode;
+               } else {
+                    responseCode = 500;
+                    result.message = error.message;
+               }
           }
           res.status(responseCode).json(result);
      })();

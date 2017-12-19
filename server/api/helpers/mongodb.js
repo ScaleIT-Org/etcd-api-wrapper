@@ -1,6 +1,6 @@
 "use strict";
 /*******************************************************************
- *   mongodb/controller.js
+ *   mongodb.js
  *******************************************************************/
 const logger = require('./../../lib/logger')('mongodb.js');
 const controller = this;
@@ -49,21 +49,23 @@ controller.getObjects = async function (type, payload, query) {
      return objects
 };
 
-controller.getObjectById = async function (type, payload, query, id) {
+controller.getObjectById = async function (type, payload, query, id, uniqueProperty) {
      let kind = payload && payload.kind ? payload.kind : type;
      let descriptor = mongooseHelper.getDescriptor(kind);
      let schema = mongooseHelper.getSchema(type);
      let projection = getProjection(query);
      let populateOptions = getPopulateOptions(descriptor, query);
      let object;
+     let searchObject = {};
+     searchObject[uniqueProperty ? uniqueProperty : "_id"] = id;
      if (descriptor["mongoose:plugin"] === "i18n") {
           let lang = query && query.lang ? query.lang : "de";
-          object = await schema.findById(id, projection)
+          object = await schema.findOne(searchObject, projection)
                .populate(populateOptions)
                .exec();
           object = schema.schema.methods.toJSONLocalizedOnly(object, lang);
      } else {
-          object = await schema.findById(id, projection)
+          object = await schema.findOne(searchObject, projection)
                .populate(populateOptions)
                .lean()
                .exec();
@@ -92,7 +94,7 @@ controller.createObject = async function (type, payload, query) {
      return populatedObject;
 };
 
-controller.updateObject = async function (type, payload, query, id) {
+controller.updateObject = async function (type, payload, query, id, uniqueProperty) {
      let kind = payload && payload.kind ? payload.kind : type;
      let objectId = payload && payload._id ? payload._id : id;
      let schema = mongooseHelper.getSchema(kind);
@@ -108,8 +110,9 @@ controller.updateObject = async function (type, payload, query, id) {
                payload[key] = updatedProperty._id;
           }
      }
-
-     let object = await schema.findOne({"_id": objectId}).exec();
+     let searchObject = {};
+     searchObject[uniqueProperty ? uniqueProperty : "_id"] = objectId;
+     let object = await schema.findOne(searchObject).exec();
      if (object) {
           let updates = false;
           for (let key in payload) {
@@ -154,7 +157,7 @@ controller.deleteAllObjects = async function (type) {
      return deletedObjects;
 };
 
-controller.deleteObject = async function (type, payload, query, id) {
+controller.deleteObject = async function (type, payload, query, id, uniqueProperty) {
      let kind = payload && payload.kind ? payload.kind : type;
      let objectId = payload && payload._id ? payload._id : id;
      let schema = mongooseHelper.getSchema(kind);
@@ -178,7 +181,9 @@ controller.deleteObject = async function (type, payload, query, id) {
                }
           }
      }
-     let deletedObject = await schema.findOneAndRemove({"_id": objectId}).exec();
+     let searchObject = {};
+     searchObject[uniqueProperty ? uniqueProperty : "_id"] = objectId;
+     let deletedObject = await schema.findOneAndRemove(searchObject).exec();
      if (!deletedObject) {
           throw new errors.NotFoundError("Cannot delete object since " + type + " with id " + objectId + " was not found!", "NotFoundError");
      }
