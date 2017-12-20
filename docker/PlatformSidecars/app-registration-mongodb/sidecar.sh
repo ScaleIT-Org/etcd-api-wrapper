@@ -3,16 +3,16 @@
 echo "Sidecar running"
 echo "pid is $$"
 
-YP_ADDRESS=$YP_ADDRESS
-echo $YP_ADDRESS
+APP_REGISTRY_ADDRESS=$APP_REGISTRY_ADDRESS
+echo $APP_REGISTRY_ADDRESS
 
 #check if YP is up and running
 STR='"health": "false"'
-STR=$(curl -k -s -H "Accept: application/json" "$YP_ADDRESS/api/v1/health")
+STR=$(curl -k -s -H "Accept: application/json" "$APP_REGISTRY_ADDRESS/api/v1/health")
 while [[ $STR != *'"health":"true"'* ]]
 do
 	echo "Waiting for YP ..."
-	STR=$(curl -k -s -H "Accept: application/json" "$YP_ADDRESS/api/v1/health")
+	STR=$(curl -k -s -H "Accept: application/json" "$APP_REGISTRY_ADDRESS/api/v1/health")
 	sleep 10
 done
 
@@ -41,7 +41,7 @@ response=$(curl -X POST -k -i -f \
                 -H "Accept: application/json" \
                 -H "Content-Type: application/json" \
                 --data "$(generate_post_data)" \
-                "$YP_ADDRESS/api/v1/apps")
+                "$APP_REGISTRY_ADDRESS/api/v1/apps")
 
 echo "response of POST /api/v1/apps: " $response
 
@@ -54,7 +54,7 @@ if [ "$response" != 200 ]
                   -H "Accept: application/json" \
                   -H "Content-Type: application/json" \
                   -d '{"lifecycleStatus":"online"}' \
-                  "$YP_ADDRESS/api/v1/apps/$APP_NAME")
+                  "$APP_REGISTRY_ADDRESS/api/v1/apps/$APP_NAME")
 fi
 
 # SIGTERM-handler
@@ -70,7 +70,7 @@ term_handler() {
                -H "Accept: application/json" \
                -H "Content-Type: application/json" \
                -d '{"lifecycleStatus":"offline"}' \
-               "$YP_ADDRESS/api/v1/apps/$APP_NAME")
+               "$APP_REGISTRY_ADDRESS/api/v1/apps/$APP_NAME")
 
   exit 143; # 128 + 15 -- SIGTERM
 }

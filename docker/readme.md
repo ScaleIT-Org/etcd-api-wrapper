@@ -2,7 +2,7 @@
 
 create .env file and adapt following parameters
 
-* REGISTRY_ADDRESS=localhost:5000
+* DOCKER_REGISTRY_ADDRESS=localhost:5000
 
 #Build
 

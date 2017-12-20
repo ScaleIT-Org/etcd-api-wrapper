@@ -43,7 +43,7 @@ Prerequisites:
 
 Go to directory ./erp-proxy-dummy/docker and create an .env file:
 
-        REGISTRY_ADDRESS=<your-registry-address>
+        DOCKER_REGISTRY_ADDRESS=<your-registry-address>
 
 Build the project and push it to the registry:
 
@@ -52,10 +52,10 @@ Build the project and push it to the registry:
 
 Start Rancher Admin Panel, got to Catalog and select the app. Fill in the questions:
 
-        REGISTRY_ADDRESS
+        DOCKER_REGISTRY_ADDRESS
         HOST_IP
         EXPOSED_SERVER_PORT
-        ETCD_ADDRESS
+        APP_REGISTRY_ADDRESS
 
 ### Local
 
