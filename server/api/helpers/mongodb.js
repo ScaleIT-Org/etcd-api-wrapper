@@ -110,7 +110,7 @@ controller.updateObject = async function (type, payload, query, id, uniqueProper
           }
      }
      let searchObject = {};
-     searchObject[uniqueProperty ? uniqueProperty : "_id"] = objectId;
+     searchObject[uniqueProperty ? uniqueProperty : "_id"] = id ? id : objectId;
      let object = await schema.findOne(searchObject).exec();
      if (object) {
           let updates = false;
