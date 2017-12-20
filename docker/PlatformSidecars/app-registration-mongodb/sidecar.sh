@@ -28,7 +28,7 @@ cat <<EOF
   "icon":"$APP_ICON",
   "lifecycleStatus":"online",
   "appType":"$APP_TYPE",
-  "category":"productivity"
+  "category":"$APP_CATEGORY"
 }
 EOF
 }
