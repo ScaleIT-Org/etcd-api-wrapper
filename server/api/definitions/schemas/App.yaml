@@ -17,7 +17,6 @@ properties:
     type: string
   icon:
     type: string
-    format: hostname
   category:
     type: string
     enum:
