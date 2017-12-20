@@ -3,9 +3,9 @@ get:
   description: Returns 'Apps' to the caller
   operationId: getApps
   parameters:
-    - $ref: '../swagger/parameters.yaml#/parameters/language'
-    - $ref: '../swagger/parameters.yaml#/parameters/offset'
-    - $ref: '../swagger/parameters.yaml#/parameters/limit'
+    - $ref: '../parameters.yaml#/parameters/language'
+    - $ref: '../parameters.yaml#/parameters/offset'
+    - $ref: '../parameters.yaml#/parameters/limit'
     - name: kind
       in: query
       description: the kind of apps that should be returned
@@ -30,7 +30,7 @@ get:
     default:
       description: Error
       schema:
-        $ref: "../definitions/Error.yaml"
+        $ref: "../Error.yaml"
 post:
   description: Create an app
   operationId: createApp
@@ -49,4 +49,4 @@ post:
     default:
       description: Error
       schema:
-        $ref: "../definitions/Error.yaml"
+        $ref: "../Error.yaml"

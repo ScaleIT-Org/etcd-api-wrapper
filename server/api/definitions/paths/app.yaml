@@ -3,7 +3,7 @@ get:
   description: Get an app
   operationId: getApp
   parameters:
-    - $ref: '../swagger/parameters.yaml#/parameters/id'
+    - $ref: '../parameters.yaml#/parameters/id'
   responses:
     "200":
       description: Success
@@ -12,12 +12,12 @@ get:
     default:
       description: Error
       schema:
-        $ref: "../definitions/Error.yaml"
+        $ref: "../Error.yaml"
 put:
   description: Update an app
   operationId: updateApp
   parameters:
-    - $ref: '../swagger/parameters.yaml#/parameters/id'
+    - $ref: '../parameters.yaml#/parameters/id'
     - name: body
       description: App
       schema:
@@ -32,12 +32,12 @@ put:
     default:
       description: Error
       schema:
-        $ref: "../definitions/Error.yaml"
+        $ref: "../Error.yaml"
 delete:
   description: Delete an app
   operationId: deleteApp
   parameters:
-    - $ref: '../swagger/parameters.yaml#/parameters/id'
+    - $ref: '../parameters.yaml#/parameters/id'
   responses:
     "200":
       description: Success
@@ -46,4 +46,4 @@ delete:
     default:
       description: Error
       schema:
-        $ref: "../definitions/Error.yaml"
+        $ref: "../Error.yaml"
