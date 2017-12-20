@@ -4,9 +4,7 @@ get:
   operationId: getApps
   parameters:
     - $ref: '../parameters.yaml#/parameters/language'
-    - $ref: '../parameters.yaml#/parameters/offset'
-    - $ref: '../parameters.yaml#/parameters/limit'
-    - name: kind
+    - name: appType
       in: query
       description: the kind of apps that should be returned
       required: false
@@ -16,11 +14,20 @@ get:
       description: Success
       schema:
         type: object
+        required:
+          - total
+          - apps
         properties:
-          offset:
-            type: number
-          limit:
-            type: number
+          appType:
+            type: string
+            enum:
+              - erp
+              - photo
+              - domainApp
+              - platformEssential
+              - businessEssential
+          lang:
+            type: string
           total:
             type: number
           apps:

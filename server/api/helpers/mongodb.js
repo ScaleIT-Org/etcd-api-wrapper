@@ -26,20 +26,19 @@ controller.getObjects = async function (type, payload, query) {
      let schema = mongooseHelper.getSchema(type);
      let limit = query && query.limit > 0 ? query.limit : 0;
      let skip = limit > 0 && query.skip > 0 ? (query.skip - 1) * limit : 0;
-     let findQuery = getFindQuery(query);
      let projection = getProjection(query);
      let populateOptions = getPopulateOptions(descriptor, query);
      let objects;
      if (descriptor["mongoose:plugin"] === "i18n") {
           let lang = query && query.lang ? query.lang : "de";
-          objects = await schema.find(findQuery, projection)
+          objects = await schema.find(query, projection)
                .skip(skip)
                .limit(limit)
                .populate(populateOptions)
                .exec();
           objects = schema.schema.methods.toJSONLocalizedOnly(objects, lang);
      } else {
-          objects = await schema.find(findQuery, projection)
+          objects = await schema.find(query, projection)
                .skip(skip)
                .limit(limit)
                .populate(populateOptions)
@@ -192,18 +191,6 @@ controller.deleteObject = async function (type, payload, query, id, uniqueProper
 };
 
 module.exports = controller;
-
-function getFindQuery(query) {
-     let findQuery = {};
-     if (query && query.find) {
-          if (typeof  query.find === "string") {
-               findQuery = JSON.parse(query.find);
-          } else {
-               findQuery = query.find;
-          }
-     }
-     return findQuery;
-}
 
 function getProjection(query) {
      let projection = {};

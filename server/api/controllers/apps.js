@@ -16,18 +16,14 @@ function getApps(req, res, next) {
           let responseCode = 200;
           try {
                let lang = req.swagger.params["Accept-Language"].value || 'de';
-               let offset = parseInt(req.swagger.params.offset.value) || 0;
-               let limit = parseInt(req.swagger.params.limit.value) || 10;
-               let kind = req.swagger.params.kind.value || '';
+               let appType = req.swagger.params.appType.value || undefined;
                let apps = await mongodb.getObjects("App", req.body, req.query, req.params.id);
                let total = apps.length;
                result = {
-                    kind: kind,
+                    appType: appType,
                     lang: lang,
-                    offset: offset,
-                    limit: limit,
                     total: total,
-                    items: apps
+                    apps: apps
                };
           } catch (error) {
                if (error.httpStatusCode) {
