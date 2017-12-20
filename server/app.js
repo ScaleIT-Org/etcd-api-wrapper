@@ -11,6 +11,7 @@ const http = require('http');
 const https = require('https');
 const mongoose = require('mongoose');
 const mongooseHelper = require('./api/helpers/mongoose');
+const morgan = require('morgan');
 const accessControlChecker = require('./middleware/accessControlChecker');
 let logger = require('./lib/logger')("app.js");
 let app = require('express')();
@@ -44,8 +45,8 @@ async function initialize() {
           await mongoose.connect(mongodbUrl, mongooseConfig);
           logger.info("Mongoose connected to database " + mongodbUrl + "...");
           mongooseHelper.registerSchemas();
+          app.use(morgan(':method :url - :status', {stream: logger.stream}));
           let swaggerExpress = await promisify(SwaggerExpress.create)(swaggerConfig);
-          // install middleware
           swaggerExpress.register(app);
           let server;
           if (protocol === 'https') {
