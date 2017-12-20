@@ -19,7 +19,7 @@ module.exports = app; // for testing
 
 let protocol = process.env.SERVER_PROTOCOL || "https";
 let ip = process.env.HOST_IP || "localhost";
-let port = process.env.SERVER_PORT || 10010;
+let port = process.env.SERVER_PORT || 49501;
 let key = process.env.SSL_KEY || "config/server.key";
 let cert = process.env.SSL_CERT || "config/server.crt";
 let mongodbAddress = process.env.MONGODB_ADDRESS || "localhost:27017";
