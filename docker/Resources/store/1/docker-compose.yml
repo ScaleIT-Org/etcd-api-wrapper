@@ -1,7 +1,7 @@
 version: '2'
 services:
   app-registry-mongodb:
-    image: ${DOCKER_REGISTRY_ADDRESS}/app-registry-mongodb:v1.0.0
+    image: ${DOCKER_REGISTRY_ADDRESS}/app-registry-mongodb:v1.0.1
     ports:
       - "${EXPOSED_SERVER_PORT}:49501"
     secrets:

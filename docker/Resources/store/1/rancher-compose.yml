@@ -1,6 +1,6 @@
 .catalog:
   name: ERP-Proxy Dummy
-  version: "v1.0.0"
+  version: "v1.0.1"
   description: "ERP-Proxy Dummy description"
   minimum_rancher_version: v1.1.0
   questions:
