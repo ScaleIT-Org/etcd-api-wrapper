@@ -1,6 +1,11 @@
 type: object
 required:
-  - message
+  - error
 properties:
-  message:
-    type: string
+  error:
+    type: object
+    required:
+      - message
+    properties:
+      message:
+        type: string
