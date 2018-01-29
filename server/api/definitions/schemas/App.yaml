@@ -25,11 +25,12 @@ properties:
       - tools
       - development
       - connectivity
+      - service
+      - erp
+      - photo
   appType:
     type: string
     enum:
-      - erp
-      - photo
       - domainApp
       - platformEssential
       - businessEssential
