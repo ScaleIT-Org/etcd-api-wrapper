@@ -3,36 +3,38 @@
  *   mongoose.js
  *******************************************************************/
 const logger = require('./../../lib/logger')('mongoose.js');
-const _ = require('lodash');
 const errors = require("./errors");
+const _ = require('lodash');
 const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
 const mongooseHelper = this;
-const config = require('./mongoose.json');
-const schemaDirectory = path.join(__basedir, config.schemaPath);
 
 let descriptors = {};
 let schemas = {};
 
-mongooseHelper.registerSchemas = function () {
+mongooseHelper.registerSchemas = function (schemaDirectory, yml2js, discriminatorKey, appName) {
      try {
           let files = fs.readdirSync(schemaDirectory);
           files.map(function (file) {
                return path.join(schemaDirectory, file);
           }).filter(function (file) {
-               return fs.statSync(file).isFile() && path.extname(file) === config.yml2js ? ".yaml" : ".json";
+               return fs.statSync(file).isFile() && path.extname(file) === yml2js ? ".yaml" : ".json";
+          }).filter(function (file) {
+               let descriptor = yml2js ? require('yamljs').load(file) : fs.readFileSync(file);
+               let source = descriptor["scaleit:source"];
+               return !source || source === appName;
           }).sort(function (a, b) {
                let camelA = _.camelCase(a);
                let camelB = _.camelCase(b);
                return camelA.localeCompare(camelB);
           }).forEach(function (file) {
                try {
-                    let filename = path.basename(file, config.yml2js ? ".yaml" : ".json");
-                    let descriptor = config.yml2js ? require('yamljs').load(file) : fs.readFileSync(file);
+                    let filename = path.basename(file, yml2js ? ".yaml" : ".json");
+                    let descriptor = yml2js ? require('yamljs').load(file) : fs.readFileSync(file);
                     let mongooseSchema = extractMongooseSchema(descriptor);
                     let options = {};
-                    options.discriminatorKey = config.discriminatorKey;
+                    options.discriminatorKey = discriminatorKey ? discriminatorKey : "kind";
                     let object;
                     if (descriptor["mongoose:options"]) {
                          options = Object.assign(options, descriptor["mongoose:options"]);
@@ -216,28 +218,7 @@ function extractMongooseSchemaOfObject(property, schema) {
 function addControllerFunctions(descriptor, schema) {
      if (descriptor["mongoose:controller"]) {
           let controller = require(descriptor["mongoose:controller"]);
-          if (controller.virtual) {
-               for (let virtual of controller.virtual) {
-                    schema.virtual(virtual).get(controller[virtual]);
-               }
-          }
-          if (controller.pre) {
-               for (let pre of controller.pre) {
-                    schema.pre(pre, controller[pre]);
-               }
-          }
-          if (controller.methods) {
-               schema.methods = {};
-               for (let method of controller.methods) {
-                    schema.methods[method] = controller[method];
-               }
-          }
-          if (controller.statics) {
-               schema.statics = {};
-               for (let staticMethod of controller.statics) {
-                    schema.statics[staticMethod] = controller[staticMethod];
-               }
-          }
+          controller.init(schema);
      }
 }
 

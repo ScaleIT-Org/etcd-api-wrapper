@@ -44,7 +44,7 @@ async function initialize() {
           let mongodbUrl = "mongodb://" + mongodbAddress + "/" + mongodbDB;
           await mongoose.connect(mongodbUrl, mongooseConfig);
           logger.info("Mongoose connected to database " + mongodbUrl + "...");
-          mongooseHelper.registerSchemas();
+          mongooseHelper.registerSchemas(path.join(__dirname, "/api/definitions/schemas"), true, "kind");
           app.use(morgan(':method :url - :status', {stream: logger.stream}));
           let swaggerExpress = await promisify(SwaggerExpress.create)(swaggerConfig);
           swaggerExpress.register(app);
