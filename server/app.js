@@ -9,11 +9,12 @@ const {promisify} = require('util');
 const path = require('path');
 const http = require('http');
 const https = require('https');
+const helper = require('node-helper');
 const mongoose = require('mongoose');
-const mongooseHelper = require('./api/helpers/mongoose');
+const mongooseHelper = helper.mongoose;
 const morgan = require('morgan');
-const accessControlChecker = require('./middleware/accessControlChecker');
-let logger = require('./lib/logger')("app.js");
+const accessControlChecker = helper.middleware.accessControlChecker;
+let logger = helper.logger("app.js");
 let app = require('express')();
 module.exports = app; // for testing
 

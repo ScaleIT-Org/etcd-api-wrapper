@@ -1,7 +1,8 @@
 'use strict';
 
-const mongodb = require('./../helpers/mongodb');
-const errorHandler = require('./../../middleware/errorHandler');
+const helper = require('node-helper');
+const mongodb = helper.mongodb;
+const errorHandler = helper.middleware.errorHandler;
 
 module.exports = {
      getApps: getApps,
