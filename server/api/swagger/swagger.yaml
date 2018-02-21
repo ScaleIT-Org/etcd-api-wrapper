@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  version: "0.9.1"
+  version: "1.0.0"
   title: ScaleIT App Registry MongoDB
 basePath: /api/v1
 # 
@@ -12,11 +12,13 @@ produces:
   - application/json
 paths:
   /health:
-    $ref: 'api/definitions/paths/health.yaml'
+    $ref: 'api/paths/health.yaml'
   /apps:
-    $ref: 'api/definitions/paths/apps.yaml'
+    $ref: 'api/paths/apps.yaml#/apps'
   /apps/{id}:
-    $ref: 'api/definitions/paths/app.yaml'
+    $ref: 'api/paths/apps.yaml#/appsId'
+  /apps/schema:
+    $ref: 'api/paths/apps.yaml#/appsSchema'
   /swagger:
     x-swagger-pipe: swagger_raw
 definitions:

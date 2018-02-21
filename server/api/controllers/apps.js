@@ -2,6 +2,7 @@
 
 const helper = require('node-helper');
 const mongodb = helper.mongodb;
+const mongoose = helper.mongoose;
 const errorHandler = helper.middleware.errorHandler;
 
 module.exports = {
@@ -9,7 +10,8 @@ module.exports = {
      getApp: getApp,
      createApp: createApp,
      updateApp: updateApp,
-     deleteApp: deleteApp
+     deleteApp: deleteApp,
+     getSchema: getSchema
 };
 
 function getApps(req, res) {
@@ -73,13 +75,22 @@ function updateApp(req, res) {
 
 function deleteApp(req, res) {
      (async () => {
-          let result = {};
-          let responseCode = 200;
           try {
                let id = req.swagger.params.id.value;
                let options = mongodb.getOptions("App", req.body, req.query, "id");
-               result = await mongodb.deleteObject("App", options, req.body);
-               res.status(responseCode).json(result);
+               let result = await mongodb.deleteObject("App", options, req.body);
+               res.status(200).json(result);
+          } catch (error) {
+               errorHandler(error, req, res);
+          }
+     })();
+}
+
+function getSchema(req, res) {
+     (async () => {
+          try {
+               let result = mongoose.getDescriptor("App");
+               res.status(200).json(result);
           } catch (error) {
                errorHandler(error, req, res);
           }

@@ -6,8 +6,8 @@ get:
     200:
       description: successful operation
       schema:
-        $ref: "../HealthStatus.yaml"
+        $ref: "../definitions/definitions.yaml#/HealthStatus"
     default:
       description: Error
       schema:
-        $ref: "../Error.yaml"
+        $ref: "../definitions/definitions.yaml#/Error"
