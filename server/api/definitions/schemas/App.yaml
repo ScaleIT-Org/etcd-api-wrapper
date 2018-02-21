@@ -11,12 +11,28 @@ properties:
   id:
     type: string
     mongoose:unique: true
-  url:
+    example: com.ondics.app.pacman/pacman_1
+  name:
     type: string
+    example: com.ondics.app.pacman
+  userUrl:
+    type: string
+    example: https://<ip>:<port>/user
+  adminUrl:
+    type: string
+    example: https://<ip>:<port>/admin
+  iconUrl:
+    type: string
+    example: https://<ip>:<port>/user/icon.svg
+  title:
+    type: string
+    example: Pacman
+  shortDescription:
+    type: string
+    example: 1 line
   description:
     type: string
-  icon:
-    type: string
+    example: Pacman App von Ondics
   category:
     type: string
     enum:
@@ -27,14 +43,17 @@ properties:
       - connectivity
       - service
       - erp
-      - photo
+      - camera
+  api:
+    type: string
+    todo: siehe hydra
   appType:
     type: string
     enum:
       - domainApp
       - platformEssential
       - businessEssential
-  lifecycleStatus:
+  state:
     type: string
     enum:
       - online
@@ -44,9 +63,9 @@ properties:
       - installing
       - error
       - blocking
-  visibleForRole:
-    type: array
-    mongoose:ref: Role
-    items:
+  createdAt:
       type: string
-      format: uri
+      format: date-time
+  updatedAt:
+    type: string
+    format: date-time
