@@ -1,10 +1,12 @@
 type: object
 required:
   - id
-  - url
-  - category
+  - name
+  - title
+  - shortDescription
   - appType
-  - lifecycleStatus
+  - status
+  - iconUrl
 mongoose:options:
   timestamps: true
 properties:
@@ -15,15 +17,6 @@ properties:
   name:
     type: string
     example: com.ondics.app.pacman
-  userUrl:
-    type: string
-    example: https://<ip>:<port>/user
-  adminUrl:
-    type: string
-    example: https://<ip>:<port>/admin
-  iconUrl:
-    type: string
-    example: https://<ip>:<port>/user/icon.svg
   title:
     type: string
     example: Pacman
@@ -41,19 +34,15 @@ properties:
       - tools
       - development
       - connectivity
-      - service
       - erp
       - camera
-  api:
-    type: string
-    todo: siehe hydra
   appType:
     type: string
     enum:
       - domainApp
       - platformEssential
       - businessEssential
-  state:
+  status:
     type: string
     enum:
       - online
@@ -63,9 +52,23 @@ properties:
       - installing
       - error
       - blocking
+  apiEntrypoint:
+    type: string
+    example: https://<ip>:<port>/api/v1
+  adminUrl:
+    type: string
+    example: https://<ip>:<port>/admin
+  userUrl:
+    type: string
+    example: https://<ip>:<port>/user
+  iconUrl:
+    type: string
+    example: https://<ip>:<port>/user/icon.svg
   createdAt:
-      type: string
-      format: date-time
+    type: string
+    format: date-time
+    mongoose: skipInSchemaDefinition
   updatedAt:
     type: string
     format: date-time
+    mongoose: skipInSchemaDefinition
