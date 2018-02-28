@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   app-registry-mongodb:
-    image: ${DOCKER_REGISTRY_ADDRESS}/app-registry-mongodb:v1.0.2
+    image: ${DOCKER_REGISTRY_ADDRESS}/app-registry-mongodb:v1.0.3
     build:
       context: ./../
       dockerfile: ./docker/PlatformEssentials/app-registry-mongodb/Dockerfile
