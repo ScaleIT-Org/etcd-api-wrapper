@@ -22,10 +22,10 @@ properties:
     example: Pacman
   shortDescription:
     type: string
-    example: 1 line
+    example: Pacman App of Ondics
   description:
     type: string
-    example: Pacman App von Ondics
+    example: Pacman App of Ondics with capabilities to reset scores
   category:
     type: string
     enum:
@@ -55,6 +55,9 @@ properties:
   apiEntrypoint:
     type: string
     example: https://<ip>:<port>/api/v1
+  apiPaths:
+    type: string
+    example: "'/verify','/login','/logout'"
   adminUrl:
     type: string
     example: https://<ip>:<port>/admin
