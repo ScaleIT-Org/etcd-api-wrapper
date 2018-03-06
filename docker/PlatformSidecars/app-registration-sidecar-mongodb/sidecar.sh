@@ -22,13 +22,19 @@ echo "response of GET /api/v1/health: " $STR
 generate_post_data() {
 cat <<EOF
 {
-  "id":"$APP_NAME",
-  "url":"$APP_URL",
+  "id":"$APP_ID",
+  "name": "$APP_NAME",
+  "title": "$APP_TITLE",
+  "shortDescription": "$APP_SHORT_DESCRIPTION",
   "description":"$APP_DESCRIPTION",
-  "icon":"$APP_ICON",
-  "lifecycleStatus":"online",
+  "category":"$APP_CATEGORY",
   "appType":"$APP_TYPE",
-  "category":"$APP_CATEGORY"
+  "apiEntrypoint": "$APP_API_ENTRYPOINT",
+  "apiPaths": "$APP_API_PATHS",
+  "adminUrl": "$APP_ADMIN_URL",
+  "userUrl": "$APP_USER_URL",
+  "iconUrl": "$APP_ICON_URL",
+  "status":"online"
 }
 EOF
 }
