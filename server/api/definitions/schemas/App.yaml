@@ -55,9 +55,9 @@ properties:
   apiEntrypoint:
     type: string
     example: https://<ip>:<port>/api/v1
-  apiPaths:
+  apiSpecificationUrl:
     type: string
-    example: "'/verify','/login','/logout'"
+    example: https://<ip>:<port>/api/v1/specification
   adminUrl:
     type: string
     example: https://<ip>:<port>/admin
