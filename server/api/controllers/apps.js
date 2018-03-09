@@ -65,7 +65,7 @@ function updateApp(req, res) {
           try {
                let id = req.swagger.params.id.value;
                let options = mongodb.getOptions("App", req.body, req.query, "id");
-               let result = await mongodb.updateObject("App", options, req.body);
+               let result = await mongodb.updateObject("App", options, Object.assign({}, req.body, {id: id}));
                res.status(200).json(result);
           } catch (error) {
                errorHandler(error, req, res);
@@ -78,7 +78,7 @@ function deleteApp(req, res) {
           try {
                let id = req.swagger.params.id.value;
                let options = mongodb.getOptions("App", req.body, req.query, "id");
-               let result = await mongodb.deleteObject("App", options, req.body);
+               let result = await mongodb.deleteObject("App", options, Object.assign({}, req.body, {id: id}));
                res.status(200).json(result);
           } catch (error) {
                errorHandler(error, req, res);
