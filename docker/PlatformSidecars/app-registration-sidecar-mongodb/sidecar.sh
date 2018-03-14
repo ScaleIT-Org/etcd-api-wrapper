@@ -30,7 +30,7 @@ cat <<EOF
   "category":"$APP_CATEGORY",
   "appType":"$APP_TYPE",
   "apiEntrypoint": "$APP_API_ENTRYPOINT",
-  "apiPaths": "$APP_API_PATHS",
+  "apiSpecificationUrl": "$APP_API_SPECIFICATION_URL",
   "adminUrl": "$APP_ADMIN_URL",
   "userUrl": "$APP_USER_URL",
   "iconUrl": "$APP_ICON_URL",
