@@ -1,3 +1,4 @@
+id: "api/v1/definitions/schemas/App.yaml"
 type: object
 required:
   - id
