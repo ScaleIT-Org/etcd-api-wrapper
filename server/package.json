@@ -9,15 +9,15 @@
   "main": "app.js",
   "dependencies": {
     "bluebird": "^3.5.1",
-    "express": "^4.12.3",
+    "express": "^4.16.3",
     "lodash": "^4.17.5",
-    "mongoose": "^4.13.11",
+    "mongoose": "^4.13.12",
     "mongoose-i18n-localize": "^0.3.0",
     "morgan": "^1.9.0",
     "node-helper": "git+https://git.iao.fraunhofer.de/knecht/node-helper.git",
     "swagger-express-mw": "^0.1.0",
     "swagger-tools": "^0.10.3",
-    "winston": "^2.4.0",
+    "winston": "^2.4.1",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
