@@ -47,7 +47,9 @@ async function initialize() {
           logger.info("Mongoose connected to database " + mongodbUrl + "...");
           mongooseHelper.registerSchemas(path.join(__dirname, "/api/definitions/schemas"), true, "kind");
           app.use(morgan(':method :url - :status', {stream: logger.stream}));
-          app.use('/api', accessControlChecker, express.static(path.join(__dirname, 'api')));
+          app.use(accessControlChecker);
+          // serve /api directory that swagger editor supports multiple files
+          app.use('/api', express.static(path.join(__dirname, 'api')));
           let swaggerExpress = await promisify(SwaggerExpress.create)(swaggerConfig);
           swaggerExpress.register(app);
           let server;
@@ -64,7 +66,6 @@ async function initialize() {
           await server.listen(port);
           logger.info('Server listening at %s://%s:%s', protocol, ip, port);
           logger.info('Hit CTRL-C to stop the server');
-          // serve /api directory that swagger editor supports multiple files
           app.use(SwaggerUi(swaggerExpress.runner.swagger));
           logger.info('Swagger Documentation available at %s://%s:%s/docs', protocol, ip, port);
           logger.info('Swagger API-Documentation available at %s://%s:%s/api-docs', protocol, ip, port);
