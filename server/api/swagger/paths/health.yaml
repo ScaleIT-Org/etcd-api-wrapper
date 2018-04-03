@@ -1,0 +1,13 @@
+x-swagger-router-controller: health
+get:
+  description: Returns 'HealthStatus' to the caller
+  operationId: getHealthStatus
+  responses:
+    200:
+      description: successful operation
+      schema:
+        $ref: "../definitions/definitions.yaml#/HealthStatus"
+    default:
+      description: Error
+      schema:
+        $ref: "../definitions/definitions.yaml#/Error"

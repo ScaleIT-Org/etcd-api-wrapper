@@ -1,0 +1,126 @@
+apps:
+  x-swagger-router-controller: apps
+  get:
+    description: Returns 'Apps' to the caller
+    operationId: getApps
+    parameters:
+      - $ref: '../definitions/parameters.yaml#/parameters/language'
+      - name: appType
+        in: query
+        description: the kind of apps that should be returned
+        required: false
+        type: string
+    responses:
+      "200":
+        description: Success
+        schema:
+          type: object
+          required:
+            - total
+            - apps
+          properties:
+            appType:
+              type: string
+              enum:
+                - erp
+                - photo
+                - domainApp
+                - platformEssential
+                - businessEssential
+            lang:
+              type: string
+            total:
+              type: number
+            apps:
+              type: array
+              items:
+                $ref: "../definitions/schemas/App.yaml"
+      default:
+        description: Error
+        schema:
+          $ref: "../definitions/definitions.yaml#/Error"
+  post:
+    description: Create an app
+    operationId: createApp
+    parameters:
+      - name: body
+        description: App
+        schema:
+          $ref: "../definitions/schemas/App.yaml"
+        in: body
+        required: true
+    responses:
+      "200":
+        description: Success
+        schema:
+          $ref: "../definitions/schemas/App.yaml"
+      default:
+        description: Error
+        schema:
+          $ref: "../definitions/definitions.yaml#/Error"
+
+appsId:
+  x-swagger-router-controller: apps
+  get:
+    description: Get an app
+    operationId: getApp
+    parameters:
+      - $ref: '../definitions/parameters.yaml#/parameters/id'
+    responses:
+      "200":
+        description: Success
+        schema:
+          $ref: "../definitions/schemas/App.yaml"
+      default:
+        description: Error
+        schema:
+          $ref: "../definitions/definitions.yaml#/Error"
+  put:
+    description: Update an app
+    operationId: updateApp
+    parameters:
+      - $ref: '../definitions/parameters.yaml#/parameters/id'
+      - name: body
+        description: App
+        schema:
+          type: object
+        in: body
+        required: true
+    responses:
+      "200":
+        description: Success
+        schema:
+          $ref: "../definitions/schemas/App.yaml"
+      default:
+        description: Error
+        schema:
+          $ref: "../definitions/definitions.yaml#/Error"
+  delete:
+    description: Delete an app
+    operationId: deleteApp
+    parameters:
+      - $ref: '../definitions/parameters.yaml#/parameters/id'
+    responses:
+      "200":
+        description: Success
+        schema:
+          $ref: "../definitions/schemas/App.yaml"
+      default:
+        description: Error
+        schema:
+          $ref: "../definitions/definitions.yaml#/Error"
+
+appsSchema:
+  x-swagger-router-controller: apps
+  get:
+    description: Returns 'app schema' to the caller
+    operationId: getSchema
+    responses:
+      "200":
+        description: Success
+        schema:
+          type: object
+      default:
+        description: Error
+        schema:
+          $ref: "../definitions/definitions.yaml#/Error"
