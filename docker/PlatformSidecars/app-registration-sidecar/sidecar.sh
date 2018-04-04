@@ -30,9 +30,16 @@ cat <<EOF
   "category":"$APP_CATEGORY",
   "appType":"$APP_TYPE",
   "apiEntrypoint": "$APP_API_ENTRYPOINT",
-  "apiSpecificationUrl": "$APP_API_SPECIFICATION_URL",
   "adminUrl": "$APP_ADMIN_URL",
+  "adminConfigUrl: "$APP_ADMIN_CONFIG_URL",
+  "adminDocUrl: "$APP_ADMIN_DOC_URL",
+  "adminLogUrl": "$APP_ADMIN_LOG_URL",
+  "adminStatusUrl": "$APP_ADMIN_STATUS_URL",
   "userUrl": "$APP_USER_URL",
+  "userDocUrl": "$APP_USER_DOC_URL",
+  "userStatusUrl": "$APP_USER_STATUS_URL",
+  "devDocUrl": "$APP_DEV_DOC_URL",
+  "devSwaggerUrl": "$APP_DEV_SWAGGER_URL",
   "iconUrl": "$APP_ICON_URL",
   "status":"online"
 }
