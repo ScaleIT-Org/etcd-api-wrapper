@@ -48,31 +48,42 @@ properties:
     enum:
       - online
       - offline
-      - upgrading
-      - disabled
-      - installing
-      - error
-      - blocking
   apiEntrypoint:
     type: string
     example: https://<ip>:<port>/api/v1
-  apiSpecificationUrl:
-    type: string
-    example: https://<ip>:<port>/api/v1/specification
   adminUrl:
     type: string
     example: https://<ip>:<port>/admin
+  adminConfigUrl:
+    type: string
+    example: https://<ip>:<port>/admin#/config
+  adminDocUrl:
+    type: string
+    example: https://<ip>:<port>/admin#/doc
+  adminLogUrl:
+    type: string
+    example: https://<ip>:<port>/admin#/log
+  adminStatusUrl:
+    type: string
+    example: https://<ip>:<port>/admin#/status
   userUrl:
     type: string
     example: https://<ip>:<port>/user
+  userDocUrl:
+    type: string
+    example: https://<ip>:<port>/user#/doc
+  userStatusUrl:
+    type: string
+    example: https://<ip>:<port>/user#/status
+  devDocUrl:
+    type: string
+    example: https://<ip>:<port>/dev#/doc
+  devSwaggerUrl:
+    type: string
+    example: https://<ip>:<port>/dev#/swagger
   iconUrl:
     type: string
     example: https://<ip>:<port>/user/icon.svg
-  createdAt:
-    type: string
-    format: date-time
-    mongoose: skipInSchemaDefinition
   updatedAt:
     type: string
     format: date-time
-    mongoose: skipInSchemaDefinition
