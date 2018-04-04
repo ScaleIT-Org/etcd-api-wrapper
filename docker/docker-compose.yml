@@ -1,12 +1,12 @@
 version: '3.1'
 services:
-  app-registry-mongodb:
-    image: ${DOCKER_REGISTRY_ADDRESS}/app-registry-mongodb:v1.0.4
+  app-registry:
+    image: ${DOCKER_REGISTRY_ADDRESS}/app-registry:v1.0.0
     build:
       context: ./../
-      dockerfile: ./docker/PlatformEssentials/app-registry-mongodb/Dockerfile
-  app-registration-sidecar-mongodb:
-    image: ${DOCKER_REGISTRY_ADDRESS}/app-registration-sidecar-mongodb:v1.1.0
+      dockerfile: ./docker/PlatformEssentials/app-registry/Dockerfile
+  app-registration-sidecar:
+    image: ${DOCKER_REGISTRY_ADDRESS}/app-registration-sidecar:v1.0.0
     build:
       context: ./../
-      dockerfile: ./docker/PlatformSidecars/app-registration-sidecar-mongodb/Dockerfile
+      dockerfile: ./docker/PlatformSidecars/app-registration-sidecar/Dockerfile

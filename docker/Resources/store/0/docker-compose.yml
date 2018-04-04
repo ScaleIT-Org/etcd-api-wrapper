@@ -1,28 +1,17 @@
 version: '2'
 services:
-  app-registry-mongodb:
-    image: ${DOCKER_REGISTRY_ADDRESS}/app-registry-mongodb:v1.0.0
+  app-registry:
+    image: ${DOCKER_REGISTRY_ADDRESS}/app-registry:v1.0.0
     ports:
-      - "${EXPOSED_SERVER_PORT}:49501"
-    secrets:
-      - sslcert
-      - sslkey
+      - "${EXPOSED_SERVER_PORT}:49503"
     environment:
-      SERVER_PROTOCOL: https
+      SERVER_PROTOCOL: http
       HOST_IP: ${HOST_IP}
-      SERVER_PORT: 49501
+      SERVER_PORT: 49503
       EXPOSED_SERVER_PORT: EXPOSED_SERVER_PORT
       SSL_CERT: /run/secrets/sslcert
       SSL_KEY: /run/secrets/sslkey
       LOG_LEVEL_CONSOLE: ${LOG_LEVEL_CONSOLE}
       LOG_LEVEL_FILE: ${LOG_LEVEL_FILE}
-      MONGODB_ADDRESS: ${MONGODB_ADDRESS}
-      MONGODB_USER: ${MONOGODB_USER}
-      MONGODB_PASSWORD: ${MONGODB_PASSWORD}
-      MONGODB_DB: app-registry
+      ETCD_ADDRESS: ${ETCD_ADDRESS}
     restart: always
-secrets:
-  sslkey:
-    external: true
-  sslcert:
-    external: true

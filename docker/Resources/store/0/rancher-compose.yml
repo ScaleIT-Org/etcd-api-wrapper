@@ -1,6 +1,6 @@
 .catalog:
   name: ERP-Proxy Dummy
-  version: "v1.0.0"
+  version: "v1.0.4"
   description: "ERP-Proxy Dummy description"
   minimum_rancher_version: v1.1.0
   questions:
@@ -24,7 +24,7 @@
         Port that is exposed on the host system
       type: "string"
       required: true
-      default: "49501"
+      default: "49503"
     - variable: LOG_LEVEL_CONSOLE
       label: "Log level console"
       description: |
@@ -55,23 +55,9 @@
         - debug
         - silly
         - none
-    - variable: MONGODB_ADDRESS
-      label: "MongoDB Address"
+    - variable: ETCD_ADDRESS
+      label: "ETCD Address"
       description: |
-        Address of the MongoDB
+        Address of the ETCD
       required: true
-      default: "localhost:27017"
-    - variable: MONGODB_USER
-      label: "MongoDB User"
-      description: |
-        MongoDB User
-      type: "string"
-      required: false
-      default: ""
-    - variable: MONGODB_PASSWORD
-      label: "MongoDB Password"
-      description: |
-        MongoDB Password
-      type: "string"
-      required: false
-      default: ""
+      default: "localhost:49501"
