@@ -16,7 +16,7 @@ let logger = helper.logger("app.js");
 let app = require('express')();
 module.exports = app; // for testing
 
-let protocol = process.env.SERVER_PROTOCOL || "https";
+let protocol = process.env.SERVER_PROTOCOL || "http";
 let ip = process.env.HOST_IP || "localhost";
 let port = process.env.SERVER_PORT || 49503;
 let key = process.env.SSL_KEY || "config/server.key";
