@@ -156,7 +156,7 @@ function deleteApp(req, res) {
 function getSchema(req, res) {
      (async () => {
           try {
-               let result = {"message": "not implemented for etcd yet"};
+               let result = require('yamljs').load('./api/definitions/schemas/App.yaml');
                res.status(200).json(result);
           } catch (error) {
                errorHandler(error, req, res);
