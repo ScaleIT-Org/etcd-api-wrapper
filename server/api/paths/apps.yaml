@@ -83,7 +83,7 @@ appsId:
       - name: body
         description: App
         schema:
-          type: object
+          $ref: "../definitions/schemas/App.yaml"
         in: body
         required: true
     responses:
