@@ -11,7 +11,12 @@
     "express": "^4.16.3",
     "morgan": "^1.9.0",
     "node-etcd": "^5.1.0",
+<<<<<<< 4c3e749ae24dbd2d5daaf6c86389a77af676e237
     "swagger-node-runner": "^0.5.13",
+=======
+    "node-helper": "git+https://git.iao.fraunhofer.de/knecht/node-helper.git",
+    "swagger-express-mw": "^0.1.0",
+>>>>>>> ondics ready
     "swagger-tools": "^0.10.3",
     "winston": "^2.4.1",
     "yamljs": "^0.3.0"
