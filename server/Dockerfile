@@ -1,9 +1,9 @@
-FROM node:carbon-alpine
+FROM node:carbon
 
 WORKDIR /opt/app
 
 COPY package.json /tmp/package.json
-RUN apk update && cd /tmp && npm install
+RUN apt-get update && cd /tmp && npm install
 RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
 COPY ./ /opt/app/
 
