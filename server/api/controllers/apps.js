@@ -26,22 +26,25 @@ function getApps(req, res) {
                let lang = req.swagger.params["Accept-Language"].value || 'de';
                let appType = req.swagger.params.appType.value || undefined;
                etcd.get("", {recursive: true}, function (res, err, msg) {
-                    let etcdapps = msg.node.nodes;
-                    let typeBool = true;
                     let apps = [];
-                    for (let directory of etcdapps) {
-                         let appsEntry = {};
-                         for (let info of directory.nodes[0].nodes) {
-                              let key = info.key.split("/")[3];
-                              if (appType && (key === "appType" && info.value !== appType)) {
-                                   typeBool = false;
+                    if (msg.node.nodes && msg.node.nodes.length > 0 && msg.node.nodes[0].key === "/apps") {
+                         let etcdapps = msg.node.nodes[0].nodes;
+                         if (etcdapps && etcdapps.length > 0) {
+                              for (let directory of etcdapps) {
+                                   let typeBool = true;
+                                   let appsEntry = {};
+                                   for (let node of directory.nodes) {
+                                        let key = node.key.split("/")[3];
+                                        if (appType && (key === "appType" && node.value !== appType)) {
+                                             typeBool = false;
+                                        }
+                                        appsEntry[key] = node.value
+                                   }
+                                   if (typeBool) {
+                                        apps.push(appsEntry);
+                                   }
                               }
-                              appsEntry[key] = info.value
                          }
-                         if (typeBool === true) {
-                              apps.push(appsEntry);
-                         }
-                         typeBool = false;
                     }
                     let total = apps.length;
                     let result = {
@@ -64,22 +67,24 @@ function getApp(req, res) {
           try {
                let id = decodeURIComponent(req.swagger.params.id.value);
                etcd.get("", {recursive: true}, function (res, err, msg) {
-                    let etcdapps = msg.node.nodes;
-                    let typeBool = false;
                     let answer = {};
-                    for (let directory of etcdapps) {
-                         let appsEntry = {};
-                         for (let info of directory.nodes[0].nodes) {
-                              let key = info.key.split("/")[3];
-                              if (id && (key === "id" && info.value === id)) {
-                                   typeBool = true;
+                    if (msg.node.nodes && msg.node.nodes.length > 0 && msg.node.nodes[0].key === "/apps") {
+                         let etcdapps = msg.node.nodes[0].nodes;
+                         let typeBool = false;
+                         for (let directory of etcdapps) {
+                              let appsEntry = {};
+                              for (let node of directory.nodes) {
+                                   let key = node.key.split("/")[3];
+                                   if (id && (key === "id" && node.value === id)) {
+                                        typeBool = true;
+                                   }
+                                   appsEntry[key] = node.value
                               }
-                              appsEntry[key] = info.value
+                              if (typeBool === true) {
+                                   answer = appsEntry;
+                              }
+                              typeBool = false;
                          }
-                         if (typeBool === true) {
-                              answer = appsEntry;
-                         }
-                         typeBool = false;
                     }
                     res.status(200).json(answer);
                }.bind(null, res));
@@ -92,9 +97,10 @@ function getApp(req, res) {
 function createApp(req, res) {
      (async () => {
           try {
-               etcd.mkdir(req.body.id);
+               //TODO to support multiple instances of apps req.body.id should be used instead of req.body.name
+               etcd.mkdir("/apps/" + req.body.name);
                for (let key in req.body) {
-                    etcd.set(req.body.id + "/" + key, req.body[key]);
+                    etcd.set("/apps/" + req.body.name + "/" + key, req.body[key]);
                }
                res.status(200).json(req.body);
           } catch (error) {
@@ -112,9 +118,10 @@ function updateApp(req, res) {
                } else {
                     id = req.body.id;
                }
-               etcd.rmdir(id, {recursive: true});
+               //TODO to support multiple instances of apps req.body.id should be used instead of req.body.name
+               etcd.rmdir(req.body.name, {recursive: true});
                for (let key in req.body) {
-                    etcd.set(req.body.id + "/" + key, req.body[key]);
+                    etcd.set("/apps/" + req.body.name + "/" + key, req.body[key]);
                }
                res.status(200).json(req.body);
           } catch (error) {
@@ -128,23 +135,25 @@ function deleteApp(req, res) {
           try {
                let id = decodeURIComponent(req.swagger.params.id.value);
                etcd.get("", {recursive: true}, function (res, err, msg) {
-                    let etcdapps = msg.node.nodes;
-                    let typeBool = false;
                     let answer = {};
-                    for (let node in etcdapps) {
-                         let appsEntry = {};
-                         for (let info in etcdapps[node].nodes) {
-                              if (etcdapps[node].nodes[info].value == id) {
-                                   typeBool = true;
+                    if (msg.node.nodes && msg.node.nodes.length > 0 && msg.node.nodes[0].key === "/apps") {
+                         let etcdapps = msg.node.nodes[0].nodes;
+                         let typeBool = false;
+                         for (let directory of etcdapps) {
+                              let appsEntry = {};
+                              for (let info in etcdapps[directory].nodes) {
+                                   if (etcdapps[directory].nodes[info].value === id) {
+                                        typeBool = true;
+                                   }
+                                   appsEntry[etcdapps[directory].nodes[info].key.split("/")[2]] = etcdapps[directory].nodes[info].value
                               }
-                              appsEntry[etcdapps[node].nodes[info].key.split("/")[2]] = etcdapps[node].nodes[info].value
+                              if (typeBool) {
+                                   answer = appsEntry;
+                              }
+                              typeBool = false;
                          }
-                         if (typeBool == true) {
-                              answer = appsEntry;
-                         }
-                         typeBool = false;
+                         etcd.rmdir(id, {recursive: true});
                     }
-                    etcd.rmdir(id, {recursive: true});
                     res.status(200).json(answer);
                }.bind(null, res))
           } catch (error) {
