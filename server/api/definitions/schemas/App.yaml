@@ -29,25 +29,32 @@ properties:
     example: Pacman App of Ondics with capabilities to reset scores
   category:
     type: string
-    enum:
-      - productivity
-      - utilities
-      - tools
-      - development
-      - connectivity
-      - erp
-      - camera
+    # temporarily disable category enum validation since final category names not yet defined
+    #    enum:
+    #      - productivity
+    #      - utilities
+    #      - tools
+    #      - development
+    #      - connectivity
+    #      - erp
+    #      - camera
+    #      - spiele
   appType:
     type: string
+    # temporarily add scaleit-app and scaleit-core-app as accepted appType
     enum:
       - domainApp
       - platformEssential
       - businessEssential
+      - scaleit-app
+      - scaleit-core-app
   status:
     type: string
+    # temporarily add running as accepted status, needs to be removed
     enum:
       - online
       - offline
+      - running
   apiEntrypoint:
     type: string
     example: https://<ip>:<port>/api/v1
@@ -86,4 +93,4 @@ properties:
     example: https://<ip>:<port>/user/icon.svg
   updatedAt:
     type: string
-    format: date-time
+    #    format: date-time
