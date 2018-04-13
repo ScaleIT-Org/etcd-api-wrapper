@@ -27,7 +27,7 @@ function getApps(req, res) {
                let appType = req.swagger.params.appType.value || undefined;
                etcd.get("", {recursive: true}, function (res, err, msg) {
                     let apps = [];
-                    if (msg.node.nodes && msg.node.nodes.length > 0 && msg.node.nodes[0].key === "/apps") {
+                    if (msg && msg.node.nodes && msg.node.nodes.length > 0 && msg.node.nodes[0].key === "/apps") {
                          let etcdapps = msg.node.nodes[0].nodes;
                          if (etcdapps && etcdapps.length > 0) {
                               for (let directory of etcdapps) {
@@ -68,7 +68,7 @@ function getApp(req, res) {
                let id = decodeURIComponent(req.swagger.params.id.value);
                etcd.get("", {recursive: true}, function (res, err, msg) {
                     let answer = {};
-                    if (msg.node.nodes && msg.node.nodes.length > 0 && msg.node.nodes[0].key === "/apps") {
+                    if (msg && msg.node.nodes && msg.node.nodes.length > 0 && msg.node.nodes[0].key === "/apps") {
                          let etcdapps = msg.node.nodes[0].nodes;
                          let typeBool = false;
                          for (let directory of etcdapps) {
@@ -136,7 +136,7 @@ function deleteApp(req, res) {
                let id = decodeURIComponent(req.swagger.params.id.value);
                etcd.get("", {recursive: true}, function (res, err, msg) {
                     let answer = {};
-                    if (msg.node.nodes && msg.node.nodes.length > 0 && msg.node.nodes[0].key === "/apps") {
+                    if (msg && msg.node.nodes && msg.node.nodes.length > 0 && msg.node.nodes[0].key === "/apps") {
                          let etcdapps = msg.node.nodes[0].nodes;
                          let typeBool = false;
                          for (let directory of etcdapps) {
