@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   com-iao-platform-app-registry:
-    image: ${DOCKER_REGISTRY_ADDRESS}/com-iao-platform-app-registry:v1.0.0
+    image: ${DOCKER_REGISTRY_ADDRESS}/com-iao-platform-app-registry:v1.0.1
     build:
       context: ./../
       dockerfile: ./docker/PlatformEssentials/app-registry/Dockerfile
