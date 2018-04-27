@@ -23,7 +23,7 @@ services:
       SSL_KEY: /run/secrets/sslkey
       LOG_LEVEL_CONSOLE: ${LOG_LEVEL_CONSOLE}
       LOG_LEVEL_FILE: ${LOG_LEVEL_FILE}
-      ETCD_ADDRESS: ${ETCD_ADDRESS}
+      ETCD_ADDRESS: "${HOST_IP}:49501"
     restart: always
 secrets:
   sslkey:

@@ -18,13 +18,6 @@
       type: "string"
       required: true
       default: "localhost"
-    - variable: SERVER_PORT
-      label: "Server Port"
-      description: |
-        Port that is exposed on the host system
-      type: "string"
-      required: true
-      default: "49503"
     - variable: LOG_LEVEL_CONSOLE
       label: "Log level console"
       description: |
@@ -55,9 +48,3 @@
         - debug
         - silly
         - none
-    - variable: ETCD_ADDRESS
-      label: "ETCD Address"
-      description: |
-        Address of the ETCD
-      required: true
-      default: "localhost:49501"
