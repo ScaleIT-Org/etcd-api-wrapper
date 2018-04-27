@@ -1,0 +1,20 @@
+version: '3'
+services:
+  app-registry-etcd-api:
+    build: ./PlatformEssentials/app-registry/Dockerfile
+    ports:
+      - "49503:49503"
+  etcd-browser:
+    build: ./PlatformSidecars/etcd-browser/Dockerfile
+    ports:
+      - "49502:49502"
+  etcd:
+    image: quay.io/coreos/etcd
+    command:
+      - /usr/local/bin/etcd
+      - "-advertise-client-urls=http://0.0.0.0:49501"
+      - "-listen-client-urls=http://0.0.0.0:49501"
+    ports:
+      - "49501:49501"
+    environment:
+      - ETCD_CORS=*

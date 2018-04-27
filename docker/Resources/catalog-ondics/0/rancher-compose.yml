@@ -4,13 +4,6 @@
   description: "Description of App Registry ETCD API"
   minimum_rancher_version: v1.1.0
   questions:
-    - variable: DOCKER_REGISTRY_ADDRESS
-      label: "Docker Registry Address"
-      description: |
-        Address for Docker Registry where the images are available
-      type: "string"
-      required: true
-      default: "localhost:5000"
     - variable: HOST_IP
       label: "Host IP"
       description: |
@@ -18,13 +11,6 @@
       type: "string"
       required: true
       default: "localhost"
-    - variable: SERVER_PORT
-      label: "Server Port"
-      description: |
-        Port that is exposed on the host system
-      type: "string"
-      required: true
-      default: "49503"
     - variable: LOG_LEVEL_CONSOLE
       label: "Log level console"
       description: |

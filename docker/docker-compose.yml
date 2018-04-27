@@ -1,7 +1,12 @@
 version: '3.1'
 services:
-  com-iao-platform-app-registry:
-    image: ${DOCKER_REGISTRY_ADDRESS}/com-iao-platform-app-registry:v1.0.1
+  de-kit-platform-app-registry-etcd-browser:
+    image: ${DOCKER_REGISTRY_ADDRESS}/de-kit-platform-app-registry-etcd-browser:v1.0.0
+    build:
+      context: ./../
+      dockerfile: ./docker/PlatformSidecars/etcd-browser/Dockerfile
+  com-iao-platform-app-registry-etcd-api:
+    image: ${DOCKER_REGISTRY_ADDRESS}/com-iao-platform-app-registry-etcd-api:v1.0.0
     build:
       context: ./../
       dockerfile: ./docker/PlatformEssentials/app-registry/Dockerfile

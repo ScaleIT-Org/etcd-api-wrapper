@@ -1,24 +1,16 @@
 version: '2'
 services:
-  de-kit-platform-app-registry-etcd:
-    image: quay.io/coreos/etcd
-    ports:
-      - "49501:49501"
-  de-kit-platform-app-registry-etcd-browser:
-    image: ${DOCKER_REGISTRY_ADDRESS}/de-kit-platform-app-registry-etcd-browser:v1.0.0
-    ports:
-      - "49502:49502"
   com-iao-platform-app-registry-etcd-api:
-    image: ${DOCKER_REGISTRY_ADDRESS}/com-iao-platform-app-registry-etcd-api:v1.0.0
+    image: scaleit-app-pool.ondics.de:5000/scaleit-app-pool/com-iao-platform-app-registry-etcd-api:v1.0.0
     ports:
-      - "${SERVER_PORT}:${SERVER_PORT}"
+      - "50501:50501"
     secrets:
       - sslcert
       - sslkey
     environment:
       SERVER_PROTOCOL: https
       HOST_IP: ${HOST_IP}
-      SERVER_PORT: 49503
+      SERVER_PORT: 50501
       SSL_CERT: /run/secrets/sslcert
       SSL_KEY: /run/secrets/sslkey
       LOG_LEVEL_CONSOLE: ${LOG_LEVEL_CONSOLE}
