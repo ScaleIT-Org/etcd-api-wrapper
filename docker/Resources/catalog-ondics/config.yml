@@ -1,5 +1,5 @@
-name: ScaleIT App-Registry ETCD API
+name: ScaleIT ETCD API wrapper
 description: |
-  ScaleIT App-Registry which stores data in ETCD and delivers an API
+  ScaleIT App which provides an API for ETCD
 version: 1.0.0
 category: Platform-Essential
