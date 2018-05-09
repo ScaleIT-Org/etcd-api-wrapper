@@ -1,17 +1,18 @@
-# ScaleIT ETCD API wrapper
+# App Registry ETCD API
 
-ScaleIT App which provides an API for ETCD
+Core Service App Registry with ETCD for persisting data and REST API
 
 ## Features
 
-* provide an rest interface for ETCD (port 50501), call /docs to get swagger UI
+* standard quay.io/coreos/etcd functionality (port 49501)
+* browse and edit ETCD key/values (port 49502)
+* provide an rest interface for ETCD (port 49503), call /docs to get swagger UI
 
 ## Requirements
 
-- if running in https mode
-    - create certificate and key
-    - Install Rancher secrets from public Rancher catalog
-    - Add Secrets sslcert, sslkey and jwtSecret in Rancher "Infrastructure -> Secrets -> Add Secret"
+- create certificate and key
+- Install Rancher secrets from public Rancher catalog
+- Add Secrets sslcert, sslkey and jwtSecret in Rancher "Infrastructure -> Secrets -> Add Secret"
 
 ## Changelog
 

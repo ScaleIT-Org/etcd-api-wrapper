@@ -10,10 +10,9 @@ Core Service App Registry with ETCD for persisting data and REST API
 
 ## Requirements
 
-- if running in https mode
-    - create certificate and key
-    - Install Rancher secrets from public Rancher catalog
-    - Add Secrets sslcert, sslkey and jwtSecret in Rancher "Infrastructure -> Secrets -> Add Secret"
+- create certificate and key
+- Install Rancher secrets from public Rancher catalog
+- Add Secrets sslcert, sslkey and jwtSecret in Rancher "Infrastructure -> Secrets -> Add Secret"
 
 ## Changelog
 
