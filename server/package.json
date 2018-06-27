@@ -13,7 +13,7 @@
     "node-etcd": "^5.1.0",
     "swagger-node-runner": "^0.5.13",
     "swagger-tools": "^0.10.3",
-    "winston": "^2.4.1",
+    "winston": "^2.4.3",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
