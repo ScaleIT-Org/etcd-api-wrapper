@@ -1,27 +1,26 @@
 {
-  "name": "etcd-api-wrapper",
-  "version": "1.0.0",
-  "private": true,
-  "description": "ETCD API wrapper",
-  "keywords": [],
-  "author": "",
-  "license": "",
-  "main": "app.js",
-  "dependencies": {
-    "express": "^4.16.3",
-    "morgan": "^1.9.0",
-    "node-etcd": "^5.1.0",
-    "swagger-node-runner": "^0.5.13",
-    "swagger-tools": "^0.10.3",
-    "winston": "^2.4.3",
-    "yamljs": "^0.3.0"
-  },
-  "devDependencies": {
-    "should": "^7.1.0",
-    "supertest": "^1.0.0"
-  },
-  "scripts": {
-    "start": "node app.js",
-    "test": "swagger project test"
-  }
+    "name": "etcd-api-wrapper",
+    "version": "1.0.1",
+    "private": true,
+    "description": "ETCD API wrapper",
+    "keywords": [],
+    "author": "",
+    "license": "",
+    "main": "app.js",
+    "dependencies": {
+        "express": "^4.16.3",
+        "morgan": "^1.9.0",
+        "node-etcd": "^5.1.0",
+        "swagger-node-runner": "^0.5.13",
+        "swagger-tools": "^0.10.3",
+        "yamljs": "^0.3.0"
+    },
+    "devDependencies": {
+        "should": "^13.2.3",
+        "supertest": "^3.1.0"
+    },
+    "scripts": {
+        "start": "node app.js",
+        "test": "swagger project test"
+    }
 }
